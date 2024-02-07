@@ -1,0 +1,30 @@
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+# Generate predictions
+Y_pred = model.predict(X_test)
+Y_pred = np.argmax(Y_pred, axis=1)
+
+# Create confusion matrix
+cm = confusion_matrix(Y_test, Y_pred)
+
+# Define class names and corresponding labels
+class_names = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+class_names_labels = ['Actinic keratoses and intraepithelial carcinoma', 
+                      'Basal cell carcinoma', 
+                      'Benign keratosis-like lesions', 
+                      'Dermatofibroma', 
+                      'Melanoma', 
+                      'Melanocytic nevi', 
+                      'Vascular lesions']
+
+# Plot confusion matrix
+cm_display = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names_labels)
+
+fig, ax = plt.subplots(figsize=(8, 8))
+cm_display.plot(ax=ax, cmap=plt.cm.Blues)
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
