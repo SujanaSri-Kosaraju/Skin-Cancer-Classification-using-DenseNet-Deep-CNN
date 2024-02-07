@@ -1,0 +1,11 @@
+oversample = RandomOverSampler()
+x = x.values.reshape(x.shape[0], -1)
+x, y = oversample.fit_resample(x, y)
+x = np.array(x).reshape(-1, 28, 28, 3)
+
+
+
+# Resize images to 32x32
+x_resized = np.array([cv2.resize(img.astype(np.uint8), (32, 32)) for img in x])
+
+print('Shape of X:', x_resized.shape)
