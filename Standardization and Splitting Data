@@ -1,0 +1,30 @@
+"""Standardization and Splitting Data"""
+
+x_resized = (x_resized - np.mean(x_resized)) / np.std(x_resized)
+X_train, X_test, Y_train, Y_test = train_test_split(x_resized, y, test_size=0.2, random_state=1)
+
+base_model = DenseNet121(input_shape=(32, 32, 3), include_top=False, weights='imagenet')
+model = Sequential()
+model.add(base_model)
+model.add(Flatten())
+model.add(Dense(256, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(128, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(7, activation='softmax'))
+
+model.summary()
+
+callback = tf.keras.callbacks.ModelCheckpoint(filepath='best_model.h5', monitor='val_accuracy', mode='max', verbose=1)
+model.compile(loss='sparse_categorical_crossentropy',
+              optimizer='adam',
+              metrics=['accuracy'])
+
+history = model.fit(X_train,
+                    Y_train,
+                    validation_split=0.2,
+                    batch_size=128,
+                    epochs=20,
+                    callbacks=[callback])
+
+plt.plot(history.history['accuracy'])
