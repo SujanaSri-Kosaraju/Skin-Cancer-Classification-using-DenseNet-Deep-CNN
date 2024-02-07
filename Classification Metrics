@@ -1,0 +1,10 @@
+from sklearn.metrics import classification_report
+
+# Generate predictions
+Y_pred = model.predict(X_test)
+Y_pred = np.argmax(Y_pred, axis=1)
+
+# Generate classification report
+classification_metrics = classification_report(Y_test, Y_pred, target_names=class_names_labels)
+
+print(classification_metrics)
