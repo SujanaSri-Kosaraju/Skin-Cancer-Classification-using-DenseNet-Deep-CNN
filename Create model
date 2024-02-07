@@ -1,0 +1,7 @@
+from tensorflow.keras.applications.densenet import DenseNet121
+
+# Create DenseNet121 model
+base_model = DenseNet121(include_top=False, weights='imagenet')
+
+# Print model summary
+base_model.summary()
