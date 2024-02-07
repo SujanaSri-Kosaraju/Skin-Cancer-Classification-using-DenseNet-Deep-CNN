@@ -1,17 +1,17 @@
 Run:
 
-imports
+1.imports
 
-Pictorial Representations
+2.Pictorial Representations
 
-Shape
+3.Shape
 
-Standardization and Splitting Data
+4.Standardization and Splitting Data
 
-Model Loss and Accuracy
+5.Model Loss and Accuracy
 
-Confusion Matrix
+6.Confusion Matrix
 
-Classification Metrics
+7.Classification Metrics
 
-Create model
+8.Create model
